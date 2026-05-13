@@ -18,7 +18,7 @@ export function Avatar({ uri, name, size = 40 }: AvatarProps) {
     <View style={[styles.container, { width: size, height: size, borderRadius: size / 2 }]}>
       {uri
         ? <Image source={{ uri }} style={StyleSheet.absoluteFill} borderRadius={size / 2} />
-        : <UText style={[styles.initials, { fontSize: size * 0.35 }]}>{initials}</UText>
+        : <UText style={[styles.initials, { fontSize: size * 0.35, lineHeight: size * 0.42 }]}>{initials}</UText>
       }
     </View>
   );
@@ -26,5 +26,5 @@ export function Avatar({ uri, name, size = 40 }: AvatarProps) {
 
 const styles = StyleSheet.create({
   container: { backgroundColor: colors.brand.primary, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
-  initials: { color: colors.text.inverse, fontFamily: fonts.bold },
+  initials: { color: colors.text.inverse, fontFamily: fonts.bold, textAlign: 'center', includeFontPadding: false },
 });

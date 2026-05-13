@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     borderColor: colors.brand.primary,
   },
   label: {
-    fontSize: typography.fontSize.sm,
-    fontFamily: fonts.medium,
+    fontSize: 14,
+    fontFamily: fonts.regular,
   },
   labelDefault: {
     color: colors.text.primary,          // #101010

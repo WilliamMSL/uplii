@@ -46,11 +46,13 @@ const styles = StyleSheet.create({
     borderColor: colors.ui.border,
     borderRadius: borders.radius.md,
     padding: spacing[3],
+    minHeight: 58,
   },
   label: {
     fontSize: 14,
+    lineHeight: 18,
     fontFamily: 'MadeTommy-Regular',
-    color: colors.text.primary,
+    color: '#575757',
     flex: 1,
   },
 });

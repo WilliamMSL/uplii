@@ -72,5 +72,6 @@ const styles = StyleSheet.create({
   },
   actions: {
     gap: spacing[3],
+    paddingBottom: 4,
   },
 });

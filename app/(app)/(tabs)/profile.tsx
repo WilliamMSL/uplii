@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Screen } from '@/components/layout';
-import { UText, Avatar, Button, Divider } from '@/components/ui';
+import { UText, Button, Divider, ProfilHeader, StatCard, SettingCard } from '@/components/ui';
 import { useProfile } from '@/features/profile/useProfile';
 import { useAuth } from '@/features/auth/useAuth';
 import { LoadingOverlay } from '@/components/shared';
@@ -13,24 +13,70 @@ export default function Profile() {
 
   useEffect(() => { fetchProfile(); }, []);
 
-  if (loading) return <LoadingOverlay />;
+  if (loading && !profile) return <LoadingOverlay />;
+
+  const joinedYear = user?.created_at ? new Date(user.created_at).getFullYear() : undefined;
 
   return (
     <Screen scroll>
-      <View style={styles.header}>
-        <Avatar name={profile?.full_name ?? user?.email} size={72} />
-        <UText variant="h3">{profile?.full_name ?? 'Mon profil'}</UText>
-        <UText variant="caption">{user?.email}</UText>
+      <ProfilHeader
+        name={profile?.full_name}
+        avatarUri={profile?.avatar_url}
+        joinedYear={joinedYear}
+      />
+
+      <View style={styles.stats}>
+        <StatCard
+          style={styles.statCard}
+          icon={<Text style={styles.emoji}>✅</Text>}
+          label="Taux d'achèvement"
+          value="78%"
+        />
+        <StatCard
+          style={styles.statCard}
+          icon={<Text style={styles.emoji}>🎯</Text>}
+          label="Programmes réalisés"
+          value="12"
+        />
+        <StatCard
+          style={styles.statCard}
+          icon={<Text style={styles.emoji}>⏳</Text>}
+          label="Programmes en cours"
+          value="3"
+        />
+        <StatCard
+          style={styles.statCard}
+          icon={<Text style={styles.emoji}>🏆</Text>}
+          label="Série la plus longue"
+          value="21 j"
+        />
       </View>
 
-      <Divider />
+      <StatCard
+        horizontal
+        icon={<Text style={styles.emoji}>🔥</Text>}
+        label="Série en cours"
+        value="7 j"
+      />
 
-      {profile?.bio && (
-        <View style={styles.section}>
-          <UText variant="small" style={styles.label}>Bio</UText>
-          <UText variant="body">{profile.bio}</UText>
-        </View>
-      )}
+      <View style={styles.settingsGroup}>
+        <SettingCard label="Mon compte" />
+        <SettingCard label="Notifications" />
+        <SettingCard label="Abonnement" />
+        <SettingCard label="Langage" />
+        <SettingCard label="Thème" />
+      </View>
+
+      <View style={styles.settingsGroup}>
+        <SettingCard label="Centre d'aide" />
+        <SettingCard label="Remarques" />
+      </View>
+
+      <View style={styles.settingsGroup}>
+        <SettingCard label="Conditions d'utilisation" />
+        <SettingCard label="Politique de confidentialité" />
+        <SettingCard label="Remerciements" />
+      </View>
 
       <Button
         label="Se déconnecter"
@@ -43,8 +89,19 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
-  header: { alignItems: 'center', gap: spacing[2], paddingVertical: spacing[6] },
-  section: { gap: spacing[1], marginVertical: spacing[3] },
-  label: { color: colors.text.secondary },
-  signOut: { marginTop: spacing[8] },
+  stats: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing[2],
+    marginTop: spacing[4],
+    marginBottom: spacing[2],
+  },
+  statCard: {
+    flex: 1,
+    minWidth: '45%',
+  },
+  settingsGroup: { gap: spacing[2], marginTop: spacing[2] },
+
+  signOut: { marginTop: spacing[6] },
+  emoji: { fontSize: 34, lineHeight: 42, textAlign: 'center' },
 });

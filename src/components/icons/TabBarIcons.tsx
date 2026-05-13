@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { Path, Circle } from 'react-native-svg';
+import Svg, { Path, Circle, Rect } from 'react-native-svg';
 
 export function PhoneIcon({ color = '#50BBEC', width = 28, height = 28 }: { color?: string; width?: number; height?: number }) {
   return (
@@ -41,11 +41,11 @@ export function ChartsIcon({ color = '#906ACC', width = 28, height = 28 }: { col
   );
 }
 
-export function PlusIcon({ colorMain = '#F7C600', colorLight = '#FFD52D', width = 28, height = 28 }: { colorMain?: string; colorLight?: string; width?: number; height?: number }) {
+export function PlusIcon({ colorMain = '#F7C600', colorLight = '#FFD52D', width = 25, height = 25 }: { colorMain?: string; colorLight?: string; width?: number; height?: number }) {
   return (
     <Svg width={width} height={height} viewBox="0 0 25 25" fill="none">
-      <Path d="M9 0H16V25H9Z" rx="2" fill={colorMain} />
-      <Path d="M25 9H0V16C0 17.1046 0.895431 18 2 18H25V9Z" rx="2" fill={colorLight} transform="rotate(90 12.5 12.5)" />
+      <Rect x="9" width="7" height="25" rx="2" fill={colorMain} />
+      <Rect x="25" y="9" width="7" height="25" rx="2" transform="rotate(90 25 9)" fill={colorLight} />
     </Svg>
   );
 }

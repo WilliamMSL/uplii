@@ -52,11 +52,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: spacing[3],
+    minHeight: 58,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing[2],
+    width: '100%',
   },
   headerHorizontal: {
     flexDirection: 'row',
@@ -65,16 +67,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   iconContainer: {
-    width: 26,
-    height: 26,
+    width: 42,
+    height: 42,
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
+    overflow: 'visible',
   },
   label: {
     fontSize: 14,
+    lineHeight: 18,
     fontFamily: 'MadeTommy-Regular',
     color: colors.text.secondary,
+    flex: 1,
+    flexWrap: 'wrap',
   },
   value: {
     fontSize: 24,

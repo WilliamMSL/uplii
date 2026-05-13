@@ -6,7 +6,7 @@ interface TaskIndicatorProps {
   style?: ViewStyle;
 }
 
-export function TaskIndicator({ children }: TaskIndicatorProps) {
+export function TaskIndicator({ children, style }: TaskIndicatorProps) {
   return (
     <View style={[styles.container, style]}>
       {children}
