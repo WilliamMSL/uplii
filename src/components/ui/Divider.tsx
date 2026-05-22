@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: colors.ui.border,
   },
   row: {
     flexDirection: 'row',
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     gap: spacing[3],
   },
   label: {
-    fontSize: 13,
-    color: colors.text.secondary,
+    fontSize: 12,
+    color: colors.ui.border,
     fontFamily: 'MadeTommy-Regular',
   },
 });

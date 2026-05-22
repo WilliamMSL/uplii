@@ -14,6 +14,8 @@ interface CircleButtonProps {
   disabled?: boolean;
   width?: number;
   height?: number;
+  topFontSize?: number;
+  bottomFontSize?: number;
   style?: ViewStyle;
 }
 
@@ -28,6 +30,8 @@ export function CircleButton({
   disabled = false,
   width = 73,
   height = 61,
+  topFontSize = 32,
+  bottomFontSize = 16,
   style,
 }: CircleButtonProps) {
   const translateY = useRef(new Animated.Value(0)).current;
@@ -49,9 +53,15 @@ export function CircleButton({
 
   const isDisabled = disabled || loading;
 
-  const spinnerColor = variant === 'primary' || variant === 'tertiary'
-    ? colors.text.inverse
-    : colors.brand.primary;
+  const DISABLED_BG     = '#DDDDDD';
+  const DISABLED_TEXT   = '#B6B6B6';
+  const DISABLED_BORDER = '#B6B6B6';
+
+  const spinnerColor = isDisabled
+    ? DISABLED_TEXT
+    : variant === 'primary' || variant === 'tertiary'
+      ? colors.text.inverse
+      : colors.brand.primary;
 
   const variantBg = {
     primary: colors.brand.primary,
@@ -67,6 +77,15 @@ export function CircleButton({
     tertiary: colors.tertiary.pressed,
   };
 
+  const bg          = isDisabled ? DISABLED_BG     : variantBg[variant];
+  const borderColor = isDisabled ? DISABLED_BORDER : variantBorder[variant];
+  const textColor   = isDisabled
+    ? DISABLED_TEXT
+    : variant === 'secondary' ? colors.text.primary : colors.text.inverse;
+  const subTextColor = isDisabled
+    ? DISABLED_TEXT
+    : variant === 'secondary' ? colors.text.secondary : colors.text.inverse;
+
   const borderRadius = Math.min(width, height) / 2;
 
   return (
@@ -77,22 +96,21 @@ export function CircleButton({
             width,
             height,
             borderRadius,
-            backgroundColor: variantBg[variant],
-            borderWidth: variant === 'secondary' ? 1.5 : 0,
-            borderColor: variant === 'secondary' ? colors.ui.border : 'transparent',
+            backgroundColor: bg,
+            borderWidth: variant === 'secondary' && !isDisabled ? 1.5 : 0,
+            borderColor: variant === 'secondary' && !isDisabled ? colors.ui.border : 'transparent',
             alignItems: 'center',
             justifyContent: 'center',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.15,
+            shadowOpacity: isDisabled ? 0 : 0.15,
             shadowRadius: 3,
-            elevation: 4,
+            elevation: isDisabled ? 0 : 4,
           },
-          isDisabled && { opacity: 0.5 },
           {
             transform: [{ translateY }],
             borderBottomWidth,
-            borderBottomColor: variantBorder[variant],
+            borderBottomColor: borderColor,
           },
         ]}
       >
@@ -102,10 +120,10 @@ export function CircleButton({
           <UText style={{ textAlign: 'center' }}>
             <UText
               style={{
-                fontSize: 32,
+                fontSize: topFontSize,
                 fontFamily: 'MadeTommy-Bold',
-                color: variant === 'secondary' ? colors.text.primary : colors.text.inverse,
-                lineHeight: 32,
+                color: textColor,
+                lineHeight: topFontSize,
               }}
             >
               {topText}
@@ -113,11 +131,11 @@ export function CircleButton({
             {'\n'}
             <UText
               style={{
-                fontSize: 16,
+                fontSize: bottomFontSize,
                 fontFamily: 'MadeTommy-Regular',
-                color: variant === 'secondary' ? colors.text.secondary : colors.text.inverse,
+                color: subTextColor,
                 textTransform: 'uppercase',
-                lineHeight: 20,
+                lineHeight: bottomFontSize,
               }}
             >
               {bottomText}

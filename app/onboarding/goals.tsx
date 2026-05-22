@@ -45,7 +45,7 @@ export default function OnboardingQuestions() {
     if (step < 2) {
       transition(() => setStep(s => s + 1));
     } else {
-      router.push('/onboarding/ready');
+      router.push('/onboarding/name');
     }
   };
 
@@ -55,7 +55,7 @@ export default function OnboardingQuestions() {
 
   return (
     <Screen>
-      <NavHeader steps={{ current: step, total: 3 }} />
+      <NavHeader steps={{ current: step, total: 4 }} />
 
       <ScrollView
         style={styles.scroll}
