@@ -1,11 +1,12 @@
 import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabBar } from '@/components/ui/TabBar';
-import { ChatIcon, PhoneIcon, ChartsIcon, ProfileIcon, PlusIcon } from '@/components/icons/TabBarIcons';
+import { ChatIcon, PhoneIcon, ChartsIcon, ProfileIcon, PlusIcon, ProgramIcon } from '@/components/icons/TabBarIcons';
 import { spacing } from '@/design';
 
 const TAB_ICONS: Record<string, { icon: React.ReactNode }> = {
   home:    { icon: <PhoneIcon /> },
+  program: { icon: <ProgramIcon /> },
   chat:    { icon: <ChatIcon /> },
   charts:  { icon: <ChartsIcon /> },
   'uplii-plus': { icon: <PlusIcon /> },
@@ -37,6 +38,7 @@ export default function TabsLayout() {
       screenOptions={{ headerShown: false }}
     >
       <Tabs.Screen name="home"    options={{ title: 'Home' }} />
+      <Tabs.Screen name="program" options={{ title: 'Programme' }} />
       <Tabs.Screen name="chat"    options={{ title: 'Chat' }} />
       <Tabs.Screen name="charts"  options={{ title: 'Charts' }} />
       <Tabs.Screen name="uplii-plus" options={{ title: 'Uplii+' }} />
