@@ -33,6 +33,7 @@ export function ChatInput({ value, onChangeText, onSend, disabled, placeholder =
           placeholder={placeholder}
           placeholderTextColor="#B0B0B8"
           maxLength={2000}
+          multiline
         />
         <TouchableOpacity
           style={[styles.sendBtn, disabled && styles.sendBtnDisabled]}
@@ -56,16 +57,18 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     gap: 10,
   },
   input: {
     flex: 1,
-    height: 48,
+    minHeight: 48,
+    maxHeight: 120,
     borderWidth: 1,
     borderColor: '#D0D0D8',
     borderRadius: 24,
     paddingHorizontal: 24,
+    paddingVertical: 13,
     fontSize: 14,
     fontFamily: fonts.regular,
     color: '#101010',

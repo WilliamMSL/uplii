@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { View, Animated, StyleSheet } from 'react-native';
+import { View, Animated, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChatInput, ChatHeader, Badge, MessageBubble } from '@/components/ui';
 import { useChat } from '@/features/chat/useChat';
@@ -41,7 +41,10 @@ export default function Chat() {
   };
 
   return (
-    <View style={styles.root}>
+    <KeyboardAvoidingView
+      style={styles.root}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
       <ChatHeader scrollY={scrollY} />
 
       <SafeAreaView style={styles.safe} edges={['left', 'right']}>
@@ -74,7 +77,7 @@ export default function Chat() {
           disabled={isStreaming}
         />
       </SafeAreaView>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
