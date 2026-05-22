@@ -25,7 +25,9 @@ export function DayPill({ label, date, active = false, onPress }: DayPillProps) 
 
 const styles = StyleSheet.create({
   pill: {
-    width: 36,
+    flex: 1,
+    minWidth: 36,
+    maxWidth: 54,
     height: 48,
     alignItems: 'center',
     justifyContent: 'center',

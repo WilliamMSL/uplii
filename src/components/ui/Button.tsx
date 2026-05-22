@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Animated, Pressable, ActivityIndicator, StyleSheet, type ViewStyle } from 'react-native';
+import { Animated, Pressable, ActivityIndicator, StyleSheet, View, type ViewStyle } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors, spacing, borders, typography } from '@/design';
 import { UText } from './Text';
@@ -14,6 +14,7 @@ interface ButtonProps {
   size?: Size;
   loading?: boolean;
   disabled?: boolean;
+  leftIcon?: React.ReactNode;
   style?: ViewStyle;
 }
 
@@ -31,6 +32,7 @@ export function Button({
   size = 'md',
   loading = false,
   disabled = false,
+  leftIcon,
   style,
 }: ButtonProps) {
   const translateY = useRef(new Animated.Value(0)).current;
@@ -99,10 +101,14 @@ export function Button({
             },
           ]}
         >
-          {loading
-            ? <ActivityIndicator color="#37342D" size="small" />
-            : <UText style={[styles.label, { color: '#37342D' }]}>{label}</UText>
-          }
+          {loading ? (
+            <ActivityIndicator color="#37342D" size="small" />
+          ) : (
+            <View style={styles.content}>
+              {leftIcon}
+              <UText style={[styles.label, { color: '#37342D' }]}>{label}</UText>
+            </View>
+          )}
         </AnimatedLinearGradient>
       </Pressable>
     );
@@ -123,10 +129,14 @@ export function Button({
           },
         ]}
       >
-        {loading
-          ? <ActivityIndicator color={spinnerColor} size="small" />
-          : <UText style={[styles.label, variantLabelStyle[variant]]}>{label}</UText>
-        }
+        {loading ? (
+          <ActivityIndicator color={spinnerColor} size="small" />
+        ) : (
+          <View style={styles.content}>
+            {leftIcon}
+            <UText style={[styles.label, variantLabelStyle[variant]]}>{label}</UText>
+          </View>
+        )}
       </Animated.View>
     </Pressable>
   );
@@ -172,6 +182,11 @@ const styles = StyleSheet.create({
   md: { height: 50, paddingHorizontal: spacing[5] },
   lg: { height: 58, paddingHorizontal: spacing[6] },
   disabled: { opacity: 0.5 },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   label: {
     fontFamily: 'MadeTommy-Bold',
     fontSize: typography.fontSize.base,
