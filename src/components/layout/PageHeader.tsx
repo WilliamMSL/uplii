@@ -8,10 +8,11 @@ import { colors, spacing, fonts } from '@/design';
 
 interface PageHeaderProps {
   streak?: number;
+  title?: string;
   children?: React.ReactNode;
 }
 
-export function PageHeader({ streak = 0, children }: PageHeaderProps) {
+export function PageHeader({ streak = 0, title, children }: PageHeaderProps) {
   const { profile } = useProfile();
 
   const firstName = profile?.full_name?.split(' ')[0] ?? null;
@@ -21,8 +22,8 @@ export function PageHeader({ streak = 0, children }: PageHeaderProps) {
     <View style={styles.wrapper}>
       <View style={styles.top}>
         <View style={styles.left}>
-          <Avatar name={firstName ?? undefined} size={40} />
-          <UText variant="h3">{greeting}</UText>
+          {!title && <Avatar name={firstName ?? undefined} size={40} />}
+          <UText variant="h3">{title ?? greeting}</UText>
         </View>
         <View style={styles.flame}>
           <UText style={styles.flameCount}>{streak}</UText>

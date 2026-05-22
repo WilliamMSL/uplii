@@ -39,7 +39,7 @@ export default function Signup() {
                 leftIcon={<LockIcon />}
                 error={error ?? undefined}
               />
-              <PasswordStrength password={password} />
+              {password.length > 0 && <PasswordStrength password={password} />}
               <Input
                 value={confirm}
                 onChangeText={setConfirm}
